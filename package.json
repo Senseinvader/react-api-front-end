@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/Senseinvader/react-api-front-end#readme",
   "dependencies": {
+    "bootstrap": "^4.1.3",
     "react": "^16.6.0",
     "react-dom": "^16.6.0"
   },
