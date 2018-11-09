@@ -1,26 +1,34 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import VideoList from './components/videoList';
+import SearchBar from './components/searchBar';
+import YTSearch from 'youtube-api-search';
+
+const API_KEY = 'AIzaSyBYOluBSrsLsqs0xGpRPueAUsOujDYdECc';
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {videos: []};
+
+    this.videoSearch('Puffy');
+  }
+
+  videoSearch(term) {
+    YTSearch({key: API_KEY, term: term}, (data) => {
+      this.setState({
+        videos: data
+      });
+    });
+  }
+
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <React.Fragment>
+        <SearchBar/>
+        <VideoList videos = {this.state.videos}/>
+      </React.Fragment>
     );
   }
 }
