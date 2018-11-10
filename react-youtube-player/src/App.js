@@ -3,7 +3,7 @@ import './App.css';
 import VideoList from './components/videoList';
 import SearchBar from './components/searchBar';
 import VideoDetail from './components/videoDetail';
-import YTSearch from 'youtube-api-search';
+// import YTSearch from 'youtube-api-search';
 
 const API_KEY = 'AIzaSyBYOluBSrsLsqs0xGpRPueAUsOujDYdECc';
 
@@ -13,25 +13,52 @@ class App extends Component {
     super(props);
     this.state = {
       videos: [],
-      selectedVideo: null
+      selectedVideo: null,
+      searchCriteria: ''
     };
 
-    this.videoSearch('Masta');
+    // this.videoSearch('Masta');
   }
 
-  videoSearch(term) {
-    YTSearch({key: API_KEY, term: term}, (data) => {
-      this.setState({
-        videos: data,
-        selectedVideo: data[0]
-      });
+  // videoSearch(term) {
+  //   YTSearch({key: API_KEY, term: term}, (data) => {
+  //     console.log(data);
+  //     this.setState({
+  //       videos: data,
+  //       selectedVideo: data[0]
+  //     });
+  //   });
+  // }
+
+  async componentDidMount() {
+    const result = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${this.state.searchCriteria}&part=snippet&maxResults=10&key=${API_KEY}`);
+    const json = await result.json();
+    console.log(json.items);
+    this.setState({
+      videos: json.items,
+      selectedVideo: json.items[0]
     });
+  }
+
+  async componentDidUpdate(prevProps, prevState) {
+    console.log('current', this.state.searchCriteria);
+    console.log('previous', prevState.searchCriteria);
+    if (this.state.searchCriteria !== prevState.searchCriteria) {
+      const result = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${this.state.searchCriteria}&part=snippet&maxResults=10&key=${API_KEY}`);
+      const json = await result.json();
+      console.log(json.items);
+      this.setState({
+        videos: json.items,
+        selectedVideo: json.items[0]
+      });
+    }
   }
 
   render() {
     return (
       <React.Fragment>
-        <SearchBar/>
+        <SearchBar
+          onUserSearch = {userInput => this.setState({searchCriteria: userInput})}/>
         <VideoDetail video = {this.state.selectedVideo}/>
         <VideoList 
           onVideoSelect = {userSelected => this.setState({selectedVideo: userSelected})}
