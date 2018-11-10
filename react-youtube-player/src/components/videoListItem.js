@@ -5,6 +5,7 @@ export class videoListItem extends Component {
   constructor(props) {
     super(props);
     this.video = this.props.video;
+    this.onUserSelected = this.props.onUserSelected;
     this.imageUrl = this.video.snippet.thumbnails.default.url;
   }
 
@@ -12,7 +13,7 @@ export class videoListItem extends Component {
   render() {
     return (
       <div>
-      <li className="list-group-item">
+      <li onClick={() => this.onUserSelected(this.video)} className="list-group-item">
       <div className="video-list media">
         <div className="media-left">
           <img src={this.imageUrl} alt={this.video.snippet.title} className="media-object"/>

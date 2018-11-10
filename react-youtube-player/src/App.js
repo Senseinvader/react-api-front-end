@@ -34,7 +34,7 @@ class App extends Component {
         <SearchBar/>
         <VideoDetail video = {this.state.selectedVideo}/>
         <VideoList 
-          
+          onVideoSelect = {userSelected => this.setState({selectedVideo: userSelected})}
           videos = {this.state.videos}/>
       </React.Fragment>
     );
