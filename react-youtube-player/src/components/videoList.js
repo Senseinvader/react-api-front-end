@@ -14,7 +14,6 @@ export class VideoList extends Component {
       </ul>
     );
   }
-  
 
   render() {
     return (
