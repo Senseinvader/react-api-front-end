@@ -41,16 +41,8 @@ class App extends Component {
   }
 
   async componentDidUpdate(prevProps, prevState) {
-    console.log('current', this.state.searchCriteria);
-    console.log('previous', prevState.searchCriteria);
     if (this.state.searchCriteria !== prevState.searchCriteria) {
-      const result = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${this.state.searchCriteria}&part=snippet&maxResults=10&key=${API_KEY}`);
-      const json = await result.json();
-      console.log(json.items);
-      this.setState({
-        videos: json.items,
-        selectedVideo: json.items[0]
-      });
+      this.componentDidMount();
     }
   }
 
