@@ -40,7 +40,7 @@ class App extends Component {
   }
 
   async componentDidUpdate(prevProps, prevState) {
-    if (this.state.searchCriteria !== prevState.searchCriteria) {
+    if (this.state.searchCriteria !== prevState.searchCriteria ) {
       this.componentDidMount();
     }
   }
@@ -48,7 +48,7 @@ class App extends Component {
   handleDelete = (videoEtag, event) => {
     event.stopPropagation();
     const videos = this.state.videos.filter(video => video.etag !== videoEtag);
-    this.setState({ videos });
+    this.setState({ videos, selectedVideo: videos[0]});
   };
 
   render() {

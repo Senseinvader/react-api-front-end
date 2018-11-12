@@ -10,11 +10,6 @@ export class videoListItem extends Component {
     this.imageUrl = this.video.snippet.thumbnails.default.url;
   }
 
-  handleClick = () => {
-    console.log('dsgfiusfhi');
-  }
-
-
   render() {
     return (
       <div>
