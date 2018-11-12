@@ -45,7 +45,8 @@ class App extends Component {
     }
   }
 
-  handleDelete = (videoEtag) => {
+  handleDelete = (videoEtag, event) => {
+    event.stopPropagation();
     const videos = this.state.videos.filter(video => video.etag !== videoEtag);
     this.setState({ videos });
   };

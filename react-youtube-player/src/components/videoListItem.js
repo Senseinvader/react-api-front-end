@@ -28,7 +28,7 @@ export class videoListItem extends Component {
         </div>
         <div>
           <button className='delete-button'
-            onClick={() => this.props.onUserDeleted(this.video.etag)}>Delete</button>
+            onClick={(event) => this.props.onUserDeleted(this.video.etag, event)}>Delete</button>
         </div>
       </div>
     </li>
