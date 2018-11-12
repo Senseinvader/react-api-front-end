@@ -30,18 +30,12 @@ class App extends Component {
   // }
 
   async componentDidMount() {
-    const result = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${this.state.searchCriteria}&part=snippet&maxResults=10&key=${API_KEY}`);
-    const json = await result.json();
-    console.log(json.items);
-    this.setState({
-      videos: json.items,
-      selectedVideo: json.items[0]
-    });
+    this.getData();
   }
 
   async componentDidUpdate(prevProps, prevState) {
-    if (this.state.searchCriteria !== prevState.searchCriteria ) {
-      this.componentDidMount();
+    if (this.shouldUpdate(prevState)) {
+      this.getData();
     }
   }
 
@@ -50,6 +44,19 @@ class App extends Component {
     const videos = this.state.videos.filter(video => video.etag !== videoEtag);
     this.setState({ videos, selectedVideo: videos[0]});
   };
+
+  getData = async() => {
+    const result = await fetch(`https://www.googleapis.com/youtube/v3/search?q=${this.state.searchCriteria}&part=snippet&maxResults=10&key=${API_KEY}`);
+    const json = await result.json();
+    this.setState({
+      videos: json.items,
+      selectedVideo: json.items[0]
+    });
+  }
+
+  shouldUpdate = (prevState) => {
+    return this.state.searchCriteria !== prevState.searchCriteria;
+  }
 
   render() {
     return (
