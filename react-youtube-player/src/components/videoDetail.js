@@ -47,7 +47,7 @@ const VideoDetail = (props) => {
   const url = `https://www.youtube.com/embed/${videoId}`;
 
   return (
-    <div className="video-detail col-md-8">
+    <div className="video-detail col-md-7">
         <div className="embedresponsive embedresponsive-16by9">
           <iframe className="embed-responsive-item video-window" src={url} title="video" allowFullScreen frameBorder="0" ></iframe>
         </div>

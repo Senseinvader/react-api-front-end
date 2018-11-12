@@ -5,13 +5,14 @@ export class VideoList extends Component {
 
   renderVideoItems () {
     return (
-      <ul className='col-md-4 list-group'>
+      <ul className='col-md-5 list-group'>
         {this.props.videos.map((video) => {
           return (
             <VideoListItem 
-            onUserSelected = {this.props.onVideoSelect}
-            key = {video.etag} 
-            video = {video} />
+              onUserSelected = {this.props.onVideoSelect}
+              onUserDeleted = {this.props.onVideoDelete}
+              key = {video.etag} 
+              video = {video} />
             );
         })}
       </ul>

@@ -17,7 +17,6 @@ class App extends Component {
       searchCriteria: ''
     };
 
-    // this.videoSearch('Masta');
   }
 
   // videoSearch(term) {
@@ -46,6 +45,11 @@ class App extends Component {
     }
   }
 
+  handleDelete = (videoEtag) => {
+    const videos = this.state.videos.filter(video => video.etag !== videoEtag);
+    this.setState({ videos });
+  };
+
   render() {
     return (
       <React.Fragment>
@@ -54,6 +58,7 @@ class App extends Component {
         <VideoDetail video = {this.state.selectedVideo}/>
         <VideoList 
           onVideoSelect = {userSelected => this.setState({selectedVideo: userSelected})}
+          onVideoDelete = {this.handleDelete}
           videos = {this.state.videos}/>
       </React.Fragment>
     );

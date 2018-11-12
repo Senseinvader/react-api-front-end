@@ -50,3 +50,16 @@ code {
   resize: both;
   overflow: auto;
 }
+
+.delete-button {
+  border: none;
+  border-radius: 4px;
+  background-color: #ddd;
+  cursor: pointer;
+  margin-bottom: 2px;
+  padding: 15px 5px;
+}
+
+.delete-button:hover {
+  background-color: rgb(189, 184, 184);
+}

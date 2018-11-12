@@ -6,7 +6,12 @@ export class videoListItem extends Component {
     super(props);
     this.video = this.props.video;
     this.onUserSelected = this.props.onUserSelected;
+    this.onVideoDelete = this.props.onVideoDelete;
     this.imageUrl = this.video.snippet.thumbnails.default.url;
+  }
+
+  handleClick = () => {
+    console.log('dsgfiusfhi');
   }
 
 
@@ -20,6 +25,10 @@ export class videoListItem extends Component {
         </div>
         <div className="media-body">
           <div className="media-heading">{this.video.snippet.title}</div>
+        </div>
+        <div>
+          <button className='delete-button'
+            onClick={() => this.props.onUserDeleted(this.video.etag)}>Delete</button>
         </div>
       </div>
     </li>
